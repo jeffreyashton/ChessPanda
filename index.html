@@ -694,15 +694,24 @@ var sc_project=13329650;
 var sc_invisible=1;
 var sc_security="83d6f5ce";
 </script>
-<script type="text/javascript"
-src="https://www.statcounter.com/counter/counter.js"
-async></script>
-<noscript><div class="statcounter"><a title="Web Analytics"
-href="https://statcounter.com/" target="_blank"><img
-class="statcounter"
-src="https://c.statcounter.com/13329650/0/83d6f5ce/1/"
-alt="Web Analytics"
-referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<!-- Load the counter for real visitors only: skip localhost/127.0.0.1 etc. so
+     dev servers and smoke tests don't inflate the numbers. The config vars above
+     stay global (that is how counter.js reads them); only the network load is gated. -->
+<script type="text/javascript">
+(function(){
+  var h = location.hostname;
+  if (h === "localhost" || h === "127.0.0.1" || h === "0.0.0.0" || h === "" || h === "[::1]") return;
+  var s = document.createElement("script");
+  s.type = "text/javascript";
+  s.async = true;
+  s.src = "https://www.statcounter.com/counter/counter.js";
+  document.head.appendChild(s);
+})();
+</script>
+<!-- No <noscript> badge: sc_invisible=1 renders none, and a <noscript><div>
+     inside <head> is invalid HTML that Vite's build parser rejects
+     (disallowed-content-in-noscript-in-head), silently breaking the four
+     Vite apps' production builds. The counter script above is the tracker. -->
 <!-- End of Statcounter Code -->
 <!-- PANDA-ANALYTICS:END -->
 </head>
